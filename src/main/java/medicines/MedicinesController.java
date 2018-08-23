@@ -18,7 +18,7 @@ public class MedicinesController {
     public String medicines() {
         Base.open("org.postgresql.Driver", "jdbc:postgresql://127.0.0.1:5432/topicus_assignment", "martijn", "bol1986");
 
-        LazyList<Medicine> personList = Medicine.findAll().orderBy("id");
+        LazyList<Medicine> personList = Medicine.findAll().include(Package.class).orderBy("id");
         String json = personList.toJson(false);
 
         return json;
