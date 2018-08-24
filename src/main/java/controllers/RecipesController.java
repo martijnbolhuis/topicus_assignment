@@ -1,5 +1,6 @@
 package controllers;
 
+import helpers.JsonHelper;
 import models.Recipe;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.javalite.activejdbc.Base;
@@ -18,18 +19,17 @@ public class RecipesController {
         method = RequestMethod.POST
     )
     public void createRecipe(@RequestBody String payload){
+        //NOTE: Configuring DB setting in database.properties does not work.
+        Base.open("org.postgresql.Driver", "jdbc:postgresql://127.0.0.1:5432/topicus_assignment", "martijn", "bol1986");
 
         ObjectMapper mapper = new ObjectMapper();
 
-        try {
-            Recipe recipe = new Recipe();
-            recipe.fromMap(mapper.readValue(payload, Map.class));
+        Recipe recipe = new Recipe();
+        recipe.fromMap(JsonHelper.toMap(payload));
+        System.out.println(recipe.getDate("end_date").toString());
 
-        } catch (IOException e) { throw new RuntimeException(e); }
+        recipe.saveIt();
 
-
-
-        System.out.println(payload);
 
     }
 }
