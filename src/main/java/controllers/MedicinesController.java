@@ -1,15 +1,12 @@
-package medicines;
+package controllers;
 
 
-import hello.Greeting;
+import models.Package;
 import org.javalite.activejdbc.Base;
 import org.javalite.activejdbc.LazyList;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import main.java.medicines.Medicine;
-
-import java.util.List;
+import models.Medicine;
 
 @RestController
 public class MedicinesController {

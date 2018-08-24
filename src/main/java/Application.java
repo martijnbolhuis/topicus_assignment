@@ -1,7 +1,7 @@
 import org.javalite.activejdbc.Base;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import medicines.MedicinesController;
+import controllers.MedicinesController;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
