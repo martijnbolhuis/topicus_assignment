@@ -1,6 +1,5 @@
 package controllers;
 
-import helpers.JsonHelper;
 import models.Recipe;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.javalite.activejdbc.Base;
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
-import java.util.Map;
 
 @RestController
 public class RecipesController {
@@ -24,12 +22,13 @@ public class RecipesController {
 
         ObjectMapper mapper = new ObjectMapper();
 
-        Recipe recipe = new Recipe();
-        recipe.fromMap(JsonHelper.toMap(payload));
-        System.out.println(recipe.getDate("end_date").toString());
-
-        recipe.saveIt();
-
+        Recipe recipe = null;
+        try {
+            recipe = mapper.readValue(payload, Recipe.class);
+            recipe.saveIncludingRecipeMedicines();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 }
