@@ -3,13 +3,18 @@ package models;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.javalite.activejdbc.Base;
 import org.javalite.activejdbc.Model;
-
-import java.util.ArrayList;
+import validators.InclusionValidator;
 import java.util.Date;
 
 public class Recipe extends Model {
-
+    public final static String[] DELIVERY_METHODS = {"pickup", "deliver"};
     private RecipeMedicine[] recipeMedicinesToSave;
+
+    static{
+        validateWith(new InclusionValidator(DELIVERY_METHODS, "delivery_method")).message("Invalid delivery method");
+        validatePresenceOf("bsn_number", "end_date", "prescription_date", "delivery_method");
+
+    }
 
     @JsonProperty("end_date")
     public Date getEndDate() {
@@ -56,7 +61,8 @@ public class Recipe extends Model {
        this.recipeMedicinesToSave = recipesMedicines;
     }
 
-    public void saveIncludingRecipeMedicines(){
+    public boolean saveIncludingRecipeMedicines(){
+        boolean success = false;
         try {
             Base.openTransaction();
             saveIt();
@@ -69,11 +75,13 @@ public class Recipe extends Model {
             }
 
             Base.commitTransaction();
+            success = true;
         } catch(Exception e){
             Base.rollbackTransaction();
         }finally{
             Base.close();
         }
+        return success;
     }
 
 }
