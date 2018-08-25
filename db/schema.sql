@@ -1,16 +1,17 @@
 DROP TABLE medicines;
-DROP TABLE packages;
+DROP TABLE medicine_forms;
 DROP TABLE recipes;
-DROP TABLE recipes_medicines;
+DROP TABLE recipe_medicines;
 
 CREATE TABLE medicines(
   id serial,
   name varchar,
+
   created_at timestamp,
   updated_at timestamp
 );
 
-CREATE TABLE packages(
+CREATE TABLE medicine_forms(
   id serial,
 
   medicine_id int,
@@ -32,13 +33,19 @@ CREATE TABLE recipes(
   bsn_number varchar,
   prescription_date date,
   end_date date,
-  delivery_method varchar
+  delivery_method varchar,
+
+  created_at timestamp,
+  updated_at timestamp
 );
 
 CREATE TABLE recipe_medicines(
   id serial,
 
-  package_id int,
+  medicine_form_id int,
   recipe_id int,
-  usage text
+  usage text,
+
+  created_at timestamp,
+  updated_at timestamp
 );

@@ -19,12 +19,10 @@ public class RecipesController {
     public void createRecipe(@RequestBody String payload){
         //NOTE: Configuring DB setting in database.properties does not work.
         Base.open("org.postgresql.Driver", "jdbc:postgresql://127.0.0.1:5432/topicus_assignment", "martijn", "bol1986");
-
         ObjectMapper mapper = new ObjectMapper();
 
-        Recipe recipe = null;
         try {
-            recipe = mapper.readValue(payload, Recipe.class);
+            Recipe recipe = mapper.readValue(payload, Recipe.class);
             recipe.saveIncludingRecipeMedicines();
         } catch (IOException e) {
             throw new RuntimeException(e);

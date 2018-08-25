@@ -5,14 +5,14 @@ import org.javalite.activejdbc.Model;
 
 public class RecipeMedicine extends Model {
 
-    @JsonProperty("package_id")
-    public Integer getPackageId(){
-        return getInteger("package_id");
+    @JsonProperty("medicine_form_id")
+    public Integer getMedicineFormId(){
+        return getInteger("medicine_form_id");
     }
 
-    @JsonProperty("package_id")
-    public void setPackageId(Integer packageId){
-        setInteger("package_id", packageId);
+    @JsonProperty("medicine_form_id")
+    public void setMedicineFormId(Integer medicineFormIdId){
+        setInteger("medicine_form_id", medicineFormIdId);
     }
 
     @JsonProperty("usage")
