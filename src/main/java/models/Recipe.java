@@ -7,7 +7,7 @@ import validators.InclusionValidator;
 import java.util.Date;
 
 public class Recipe extends Model {
-    public final static String[] DELIVERY_METHODS = {"pickup", "deliver"};
+    public final static String[] DELIVERY_METHODS = {"pickup", "delivery"};
     private RecipeMedicine[] recipeMedicinesToSave;
 
     static{

@@ -34,7 +34,9 @@ public class RecipesController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         } finally {
-            Base.close();
+            if (Base.hasConnection()) {
+                Base.close();
+            }
         }
 
     }
