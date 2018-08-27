@@ -18,11 +18,11 @@ public class RecipesController {
         method = RequestMethod.POST
     )
     public String createRecipe(@RequestBody String payload){
-        //NOTE: Configuring DB setting in database.properties does not work.
-        Base.open("org.postgresql.Driver", "jdbc:postgresql://127.0.0.1:5432/topicus_assignment", "martijn", "bol1986");
-        ObjectMapper mapper = new ObjectMapper();
 
         try {
+            //NOTE: Configuring DB setting in database.properties does not work.
+            Base.open("org.postgresql.Driver", "jdbc:postgresql://127.0.0.1:5432/topicus_assignment", "martijn", "123456");
+            ObjectMapper mapper = new ObjectMapper();
             Recipe recipe = mapper.readValue(payload, Recipe.class);
             boolean success = recipe.saveIncludingRecipeMedicines();
             if (success){
@@ -33,6 +33,8 @@ public class RecipesController {
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
+        } finally {
+            Base.close();
         }
 
     }

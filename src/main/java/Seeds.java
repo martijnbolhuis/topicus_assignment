@@ -6,7 +6,7 @@ import org.javalite.activejdbc.Base;
 public class Seeds {
 
     public static void main(String[] args) {
-        Base.open("org.postgresql.Driver", "jdbc:postgresql://127.0.0.1:5432/topicus_assignment", "martijn", "bol1986");
+        Base.open("org.postgresql.Driver", "jdbc:postgresql://127.0.0.1:5432/topicus_assignment", "martijn", "123456");
 
         // Paracetamol
         Medicine medicine1 = new Medicine().createIt("name", "Paracetamol 500mg");
