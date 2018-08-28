@@ -21,7 +21,9 @@ public class RecipesController {
 
         try {
             //NOTE: Configuring DB setting in database.properties does not work.
-            Base.open("org.postgresql.Driver", "jdbc:postgresql://127.0.0.1:5432/topicus_assignment", "martijn", "123456");
+            if (!Base.hasConnection()) {
+                Base.open("org.postgresql.Driver", "jdbc:postgresql://127.0.0.1:5432/topicus_assignment", "martijn", "123456");
+            }
             ObjectMapper mapper = new ObjectMapper();
             Recipe recipe = mapper.readValue(payload, Recipe.class);
             boolean success = recipe.saveIncludingRecipeMedicines();
